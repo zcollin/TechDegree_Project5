@@ -1,3 +1,9 @@
+"""
+A Journal Web App built with Flask
+Author: Zachary Collins
+Date: August, 2018
+"""
+
 from flask import (Flask, g, render_template, flash, redirect, url_for,
                    abort)
 
@@ -28,18 +34,24 @@ def after_request(response):
 
 @app.route('/')
 def index():
+    """The Homepage of the app, shows all posts"""
+
     posts = models.Post.select()
     return render_template('index.html', posts=posts)
 
 
 @app.route('/entries')
 def entries():
+    """Shows all of the journal entries"""
+
     posts = models.Post.select()
     return render_template('index.html', posts=posts)
 
 
 @app.route('/details/<int:post_id>')
 def view_post(post_id):
+    """Views a specific journal post"""
+
     posts = models.Post.select().where(models.Post.id == post_id)
     if posts.count() == 0:
         abort(404)
@@ -48,6 +60,8 @@ def view_post(post_id):
 
 @app.route('/details/<int:post_id>/edit', methods=('GET', 'POST'))
 def edit_post(post_id):
+    """allows the user to edit a specific post"""
+
     form = forms.PostForm()
     posts = models.Post.select().where(models.Post.id == post_id)
     if posts.count() == 0:
@@ -65,6 +79,8 @@ def edit_post(post_id):
 
 @app.route('/details/<int:post_id>/delete', methods=('GET', 'POST'))
 def delete_post(post_id):
+    """Allows the user to see delete a specific post"""
+
     posts = models.Post.select().where(models.Post.id == post_id)
     if posts.count() == 0:
         abort(404)
@@ -74,6 +90,8 @@ def delete_post(post_id):
 
 @app.route('/new_post', methods=('GET', 'POST'))
 def post():
+    """Prompts the form, allowing a user to create a new post"""
+
     form = forms.PostForm()
     if form.validate_on_submit():
         models.Post.create(title=form.title.data,

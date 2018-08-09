@@ -1,3 +1,9 @@
+"""
+A Peewee Model for storing Journal Post's in a Database
+Author: Zachary Collins
+Date: August, 2018
+"""
+
 import datetime
 
 from peewee import *

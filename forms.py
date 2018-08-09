@@ -1,3 +1,9 @@
+"""
+A Flask Form allowing the user to enter a Journal Post
+Author: Zachary Collins
+Date: August, 2018
+"""
+
 from flask_wtf import Form
 from wtforms import StringField, DateField, IntegerField, TextAreaField
 from wtforms.fields.html5 import DateField
