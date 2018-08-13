@@ -33,6 +33,7 @@ def after_request(response):
 
 
 @app.route('/')
+@app.route('/entries')
 def index():
     """The Homepage of the app, shows all posts"""
 
@@ -40,15 +41,7 @@ def index():
     return render_template('index.html', posts=posts)
 
 
-@app.route('/entries')
-def entries():
-    """Shows all of the journal entries"""
-
-    posts = models.Post.select()
-    return render_template('index.html', posts=posts)
-
-
-@app.route('/details/<int:post_id>')
+@app.route('/entries/detail/<int:post_id>')
 def view_post(post_id):
     """Views a specific journal post"""
 
@@ -58,7 +51,7 @@ def view_post(post_id):
     return render_template('detail.html', posts=posts)
 
 
-@app.route('/details/<int:post_id>/edit', methods=('GET', 'POST'))
+@app.route('/entries/edit/<int:post_id>', methods=('GET', 'POST'))
 def edit_post(post_id):
     """allows the user to edit a specific post"""
 
@@ -77,7 +70,7 @@ def edit_post(post_id):
     return render_template('edit.html', posts=posts, form=form)
 
 
-@app.route('/details/<int:post_id>/delete', methods=('GET', 'POST'))
+@app.route('/entries/delete/<int:post_id>', methods=('GET', 'POST'))
 def delete_post(post_id):
     """Allows the user to see delete a specific post"""
 
@@ -88,7 +81,7 @@ def delete_post(post_id):
     return redirect(url_for('index'))
 
 
-@app.route('/new_post', methods=('GET', 'POST'))
+@app.route('/entry', methods=('GET', 'POST'))
 def post():
     """Prompts the form, allowing a user to create a new post"""
 

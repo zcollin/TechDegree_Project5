@@ -1,0 +1,5 @@
+Flask==1.0.2
+Flask-WTF==0.14.2
+peewee==3.6.4
+WTForms==2.2.1
+DateTime==4.2
